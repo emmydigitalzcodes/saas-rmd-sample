@@ -10,13 +10,13 @@ def home_page_view(request, *arg, **kwargs):
     qs = PageCore.objects.all()
     page_qs = PageCore.objects.filter(path=request.path)
     my_title = "My Page"
+    html_template = "home.html"
     my_context ={
         "page_title": my_title,
         "page_visit_count": page_qs.count(),
         "percent_page_visit_count": (page_qs.count() / qs.count()) * 100 if qs.count() > 0 else 0,
         "total_page_count": qs.count()
     }
-    html_template = "home.html"
     PageCore.objects.create(path=request.path)
 
     return render(request, html_template, my_context)
