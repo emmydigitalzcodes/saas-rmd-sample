@@ -1,11 +1,9 @@
-# Create a fresh railway.toml
-rm railway.toml
-echo '[build]' > railway.toml
-echo 'builder = "DOCKERFILE"' >> railway.toml
-echo 'dockerfilepath = "./Dockerfile"' >> railway.toml
-echo 'watchPatterns = [' >> railway.toml
-echo '    "requirements.txt",' >> railway.toml
-echo '    "mcc/**",' >> railway.toml
-echo '    "railway.toml",' >> railway.toml
-echo '    "Dockerfile",' >> railway.toml
-echo ']' >> railway.toml
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "./Dockerfile"
+watchPatterns = [
+    "requirements.txt", 
+    "mcc/**", 
+    "railway.toml",
+    "Dockerfile",
+]
