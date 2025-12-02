@@ -6,15 +6,22 @@ from core.models import PageCore
 
 this_dir = pathlib.Path(__file__).resolve().parent
 
-def home_page_view(request, *arg, **kwargs):
+def home_view(request, *arg, **kwargs):
+    return about_view(request, *arg, **kwargs)
+
+def about_view(request, *arg, **kwargs):
     qs = PageCore.objects.all()
     page_qs = PageCore.objects.filter(path=request.path)
+    try:
+        percent_visit = (page_qs.count() / qs.count()) * 100 if qs.count() > 0 else 0
+    except ZeroDivisionError:
+        percent_visit = 0
     my_title = "My Page"
     html_template = "home.html"
     my_context ={
         "page_title": my_title,
         "page_visit_count": page_qs.count(),
-        "percent_page_visit_count": (page_qs.count() / qs.count()) * 100 if qs.count() > 0 else 0,
+        "percent_page_visit_count": percent_visit, 
         "total_page_count": qs.count()
     }
     PageCore.objects.create(path=request.path)

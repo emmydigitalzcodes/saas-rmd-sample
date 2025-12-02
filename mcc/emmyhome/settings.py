@@ -31,8 +31,9 @@ ALLOWED_HOSTS = [
 
 if DEBUG:
     ALLOWED_HOSTS += [
+        "127.0.0.1",
         "localhost",
-        "127.0.0.1"
+        
     ]
 
 
